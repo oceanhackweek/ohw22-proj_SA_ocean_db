@@ -31,7 +31,7 @@ Our goals include gathering data from the buoys by interacting with their APIs t
 
 ### Datasets
 SiMCOSTA: https://simcosta.furg.br/home
-Background
+This is a network of floating and fixed platforms in the south atlantic ocean that collect and display meteorological and oceanic data. 
 Pirata: http://www.goosbrasil.org/pirata/dados/
 This is a national buoy program that displays meteorological and oceanic data.  
 
