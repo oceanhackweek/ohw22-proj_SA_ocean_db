@@ -19,6 +19,10 @@ Paula Marangoni
 
 Marcela Strane
 
+Michael Sun
+
+Filipe
+
 ---
 ### Background
 
