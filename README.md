@@ -23,6 +23,7 @@ Marcela Strane
 ### Background
 
 ### Goals
+Our goals include gathering data from the buoys by interacting with their APIs to download real-time series data. Applying quality control measures to the data before hosting it on the database. Sending the data to the database so that users can look for specific data and interact with the API we are developing to obtain files.  
 
 ### Datasets
 
