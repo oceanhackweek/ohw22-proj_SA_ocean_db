@@ -1,16 +1,2 @@
 # OHW22_SA_ocean_db
----
-## One line description
----
-### Collaborators
-
----
-### Background
-
-### Goals
-
-### Datasets
-
-### Workflow
-
-### References
+This is a project developed by students to bring together data from various buoys across the Brazilian coast. 
