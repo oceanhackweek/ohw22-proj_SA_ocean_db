@@ -7,7 +7,7 @@ This is a project developed by students to bridge information data gaps that are
 
 Tobias Ramalho dos Santos Ferreira
 
-Danilo A. Silva
+Danilo Augusto Silva
 
 Luiza Paschoal Stein
 
@@ -21,7 +21,7 @@ Marcela Strane
 
 Michael Sun
 
-Filipe
+Filipe Fernandes
 
 ---
 ### Background
