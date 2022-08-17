@@ -9,7 +9,8 @@ PNBOIA_BUOYS_DATA = 'http://remobsapi.herokuapp.com/api/v1/data_buoys'
 
 def pnboia_check_input(input, ids, names):
     """
-    Check if input is a valid PNBOIA buoy identifier and if is an id number or name
+    Check if input is a valid PNBOIA buoy identifier and if
+    is an id number or name
 
     Parameters
     ----------
@@ -27,7 +28,8 @@ def pnboia_check_input(input, ids, names):
     input_type : str
         Say if input is buoy id number or buoy name
     msg : str
-        Message about input, especially important for False isvalid ones
+        Message about input, especially important for False
+        isvalid ones
 
     """
     broad_msg = 'input should be buoy id number or buoy name'
@@ -76,7 +78,8 @@ def pnboia_check_input(input, ids, names):
 
 def pnboia_get_datapath(id_or_name):
     """
-    Generate PNBOIA buoy datapath from buoy id number or buoy name
+    Generate PNBOIA buoy datapath from buoy id number or
+    buoy name
 
     Parameters
     ----------
@@ -122,14 +125,14 @@ def pnboia_get_datapath(id_or_name):
     return path
 
 
-def pnboia_active_buoys():
+def pnboia_seek_active_buoy():
     """
-    Fetch PNBOIA active buyos
+    Seek for PNBOIA's active buoys
 
     Returns
     -------
     active_buoys : pandas.DataFrame
-        PNBOIA active buoys regarding API status
+        PNBOIA's active buoys regarding API status
     """
     info_df = pd.read_json(
         PNBOIA_BUOYS_INFO
@@ -141,24 +144,23 @@ def pnboia_active_buoys():
     return active_buoys
 
 
-def pnboia_download_active_buoys_data():
+def pnboia_get_active_buoy_data():
     """
-    Download all available data for each PNBOIA active buoy and save this into individual .csv files on data folder one level above current folder
+    Get all available data for each active buoy
+
+    Returns
+    -------
+    data_dict : dict
+        Dictionary where key is active buoy name and value
+        is its data stored into a pandas.DataFrame
     """
-    scriptdir = os.path.dirname(
-        sys.argv[0]
-    )
-    active_buoys = pnboia_active_buoys()
+    active_buoys = pnboia_seek_active_buoy()
+    data_dict = dict()
 
     for _, buoy in active_buoys.iterrows():
         buoy_name = buoy.name_buoy.strip()
         buoy_name = buoy_name.replace(' ', '_')
         buoy_name = buoy_name.casefold()
-
-        print(
-            'Getting {0} data'.format(
-                buoy_name.capitalize()
-        ))
 
         buoy_datapath = pnboia_get_datapath(
             buoy.id
@@ -167,18 +169,76 @@ def pnboia_download_active_buoys_data():
             buoy_datapath
         )
         if buoy_data.empty:
-            print(
-                '..{0} PNBOIA buoy identified as active, but without data from API'.format(
-                    buoy_name.capitalize()
-            ))
+            continue
+            # print(
+            #     '..{0} is identified as active, but API returns no data'.format(
+            #         buoy_name.capitalize()
+            # ))
         else:
-            buoy_data.to_csv(
+            buoy_data.set_index(
+                'date_time',
+                drop=True,
+                inplace=True
+            )
+            data_dict[buoy_name] = buoy_data
+    
+    return data_dict
+
+
+def pnboia_update_local_data():
+    """
+    Try to update local file with more recent buoy data and
+    if this do not exists yet save a new one. The data are saved into individual buoy .csv files on the data folder one level above current path. The drop of duplicated data
+    is the only treatment done here.
+    """
+    scriptdir = os.path.dirname(
+        sys.argv[0]
+    )
+    datadir = os.path.join(
+        scriptdir,
+        '../data'
+    )
+    active_data = pnboia_get_active_buoy_data()
+
+    for buoy_name, df_updates in active_data.items():
+        try:
+            df_old = pd.read_csv(
                 os.path.join(
-                    scriptdir,
-                    '../data',
+                    datadir,
                     '{0}.csv'.format(
                         buoy_name
             )))
+            print(
+                'Updating {0} local data'.format(
+                    buoy_name.capitalize()
+            ))
+            df_new = pd.concat(
+                [df_old, df_updates],
+                axis='index'
+            )
+            df_new = df_new[
+                ~df_new.index.duplicated(
+                    keep='first'
+            )]
+            df_new.to_csv(
+                os.path.join(
+                    datadir,
+                    '{0}.csv'.format(
+                        buoy_name
+            )))
+        
+        except FileNotFoundError:
+            print(
+                'Creating {0} local data'.format(
+                    buoy_name.capitalize()
+            ))
+            df_updates.to_csv(
+                os.path.join(
+                    datadir,
+                    '{0}.csv'.format(
+                        buoy_name
+            )))
+            
 
 
-pnboia_download_active_buoys_data()
+pnboia_update_local_data()
