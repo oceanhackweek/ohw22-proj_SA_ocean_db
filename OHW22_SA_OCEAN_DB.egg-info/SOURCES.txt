@@ -1,0 +1,10 @@
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+OHW22_SA_OCEAN_DB.egg-info/PKG-INFO
+OHW22_SA_OCEAN_DB.egg-info/SOURCES.txt
+OHW22_SA_OCEAN_DB.egg-info/dependency_links.txt
+OHW22_SA_OCEAN_DB.egg-info/not-zip-safe
+OHW22_SA_OCEAN_DB.egg-info/requires.txt
+OHW22_SA_OCEAN_DB.egg-info/top_level.txt
