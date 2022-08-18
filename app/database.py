@@ -1,69 +1,25 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
-import numpy as np
 import pandas as pd
-import sqlalchemy
-from urllib.parse import quote  
 
-from dotenv import load_dotenv
+# load local function
+from utils import make_db_connection
 
-
-def make_db_connection():
+def send_data_to_database(df, tablename='pnboia_buoy'):
     """
-    Create a connection with the database, using environment variables available.
+    Main pipeline to send a dataframe to the database. In this
+    function, we also check if there is any duplicated row in the
+    database, based on datetime AND pnboia_id. 
     
     Parameters
     ----------
-    
-    Returns
-    -------
-    engine : sqlalchemy.engine.base.Engine
-        engine used to communicate with the database
+    df : pandas.DataFrame
+        Dataframe to be uploaded
+    tablename : str
+        Which table send the data
     """
-    # reading credentials
-    load_dotenv()
-        
-    PASS = os.getenv('POSTGRE_PWD')
-    URL = os.getenv('POSTGRE_LOCAL')
+    # make sure the database won't have duplicated values
+    drop_duplicates_from_database(df, tablename=tablename)
     
-    # creating an engine with sqlalchemy
-    engine = sqlalchemy.create_engine(f"postgresql+psycopg2://{os.getenv('POSTGRE_USER')}:{quote(PASS)}@{URL}/{os.getenv('POSTGRE_BD')}")
-    
-    # returning the objects
-    return engine
-
-# TODO: just an old function used to test the database. Can be deleted upon acceptation to merge
-# def read_csv_temporarily(buoy_id=27):
-#     """
-#     just a dummy function that reads a csv file and send the data
-#     to the database
-#     """
-#     df = pd.read_csv('../data/alcatrazes.csv')
-    
-#     # sorting data
-#     df = df.sort_values('date_time')
-    
-#     # selecting columns
-#     df_sql = df[['buoy_id', 'date_time', 'swvht1', 'tp1', 'wvdir1']]
-    
-#     engine = make_db_connection()
-    
-#     df_sql = df_sql.rename({'buoy_id': 'pnboia_id',
-#                             'date_time': 'datetime', 
-#                             'swvht1': 'wvht', 
-#                             'tp1': 'tp', 
-#                             'wvdir1': 'wvdir'}, axis=1)
-    
-#     df_sql.index = df_sql.index.rename('obsv_id')
-    
-#     df_sql.to_sql(con=engine, name='pnboia_buoy', if_exists='append', index=False)
-    
-   
-def send_data_to_database(df, tablename='pnboia_buoy'):
-    """
-    
-    """
     # get credentials
     engine = make_db_connection()
     
