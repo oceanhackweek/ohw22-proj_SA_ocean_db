@@ -1,7 +1,7 @@
-from fetch_pnboia import *
-from database import *
-from qartod import run_qc
-from utils import make_db_connection
+from ohw22sadb.fetch_pnboia import *
+from ohw22sadb.database import *
+from ohw22sadb.qartod import run_qc
+from ohw22sadb.utils import make_db_connection
 
 # collecting the new data from PNBOIA
 print("Updating local file with the last data from PNBOIA")
