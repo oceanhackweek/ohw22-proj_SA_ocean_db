@@ -2,7 +2,7 @@
 import pandas as pd
 
 # load local function
-from utils import make_db_connection
+from ohw22sadb.utils import make_db_connection
 
 def send_data_to_database(df, tablename='pnboia_buoy'):
     """
