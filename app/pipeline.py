@@ -8,4 +8,4 @@ pnboia_update_local_data()
 df = None
 
 # sending data to the database
-send_data_to_database(df, tablename='pnboia_buoy')
+send_data_to_database(df, tablename='pnboia')
