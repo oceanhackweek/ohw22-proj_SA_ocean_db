@@ -1,11 +1,16 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
 import pandas as pd
 
-HEROKU_TOKEN = 'token=rBx9rZVa7Yi9zNo4U6_M'
-PNBOIA_BUOYS_INFO = 'https://remobsapi.herokuapp.com/api/v1/buoys'
-PNBOIA_BUOYS_DATA = 'http://remobsapi.herokuapp.com/api/v1/data_buoys'
+from datetime import datetime
+from dotenv import load_dotenv
 
+load_dotenv()
+
+BUOYS_INFO = pd.read_json(
+    os.environ['PNBOIA_BUOYS_INFO']
+)
 
 def pnboia_check_input(input, ids, names):
     """
@@ -90,13 +95,10 @@ def pnboia_get_datapath(id_or_name):
     -------
         ...
     """
-    info_df = pd.read_json(
-        PNBOIA_BUOYS_INFO
-    )
     isvalid, input_type, msg = pnboia_check_input(
         id_or_name,
-        info_df.id.values,
-        info_df.name_buoy
+        BUOYS_INFO.id.values,
+        BUOYS_INFO.name_buoy
     )
     if isvalid:
         if input_type == 'id':
@@ -105,19 +107,19 @@ def pnboia_get_datapath(id_or_name):
             )
         elif input_type == 'name':
             buoy_id = int(
-                info_df.id[
-                    info_df.name_buoy.isin([
+                BUOYS_INFO.id[
+                    BUOYS_INFO.name_buoy.isin([
                         id_or_name
             ])])
             buoy_id = 'buoy={0}'.format(
                 buoy_id
             )
         path = (
-            PNBOIA_BUOYS_DATA +
+            os.environ['PNBOIA_BUOYS_DATA'] +
             '?' +
             buoy_id +
             '&' +
-            HEROKU_TOKEN
+            os.environ['HEROKU_TOKEN']
         )
     else:
         print(msg)
@@ -134,11 +136,8 @@ def pnboia_seek_active_buoy():
     active_buoys : pandas.DataFrame
         PNBOIA's active buoys regarding API status
     """
-    info_df = pd.read_json(
-        PNBOIA_BUOYS_INFO
-    )
-    active_buoys = info_df.loc[
-        info_df.status == 'Ativa'
+    active_buoys = BUOYS_INFO.loc[
+        BUOYS_INFO.status == 'Ativa'
     ]
 
     return active_buoys
@@ -198,6 +197,9 @@ def pnboia_update_local_data():
         scriptdir,
         '../data'
     )
+    dateparser = lambda x: datetime.strptime(
+        x, "%Y-%m-%d %H:%M:%S%z"
+    )
     active_data = pnboia_get_active_buoy_data()
 
     for buoy_name, df_updates in active_data.items():
@@ -206,8 +208,13 @@ def pnboia_update_local_data():
                 os.path.join(
                     datadir,
                     '{0}.csv'.format(
-                        buoy_name
-            )))
+                        buoy_name)),
+                sep=',',
+                header=0,
+                index_col='date_time',
+                parse_dates=True,
+                date_parser=dateparser
+            )
             print(
                 'Updating {0} local data'.format(
                     buoy_name.capitalize()
@@ -239,6 +246,5 @@ def pnboia_update_local_data():
                         buoy_name
             )))
             
-
 
 pnboia_update_local_data()
