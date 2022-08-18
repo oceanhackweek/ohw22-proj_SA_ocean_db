@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
     content = f.readlines()
 requirements = [x.strip() for x in content if 'git+' not in x]
 
-setup(name='OHW22_SA_OCEAN_DB',
+setup(name='ohw22sadb',
       version="1.0",
       description="This is a project developed by students to bridge information data gaps that are seen across the Brazilian coast. We have gathered data from various buoys to create one host where the information is available to the public.",
       packages=find_packages(),
