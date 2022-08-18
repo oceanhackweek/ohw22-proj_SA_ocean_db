@@ -15,12 +15,12 @@ import matplotlib.pyplot as plt
 import scipy.stats
 
 def apply_qc(inp_aux, tinp_aux, zinp_aux, config):
-    qc = QcConfig(qc_config)
+    qc = QcConfig(config)
     
     qc_results = qc.run(
-        inp=inp,
-        tinp=tinp,
-        zinp=zinp)
+        inp=inp_aux,
+        tinp=tinp_aux,
+        zinp=zinp_aux)
 
     return qc_results
 
@@ -68,12 +68,13 @@ for b in buoys:
       if var == 'wvht':
           fail_span = [0.1, 19.9]
           suspect_span = [0.2, 16]
+            
           #spike_test
-          tolerance = 7
           suspect_threshold_spike = 25
           fail_threshold_spike = 30
           
-          # flat_test (confirm values)
+          # flat_test (forced to pass, values have to be checked)
+          tolerance = 0
           suspect_threshold_flat = 2
           fail_threshold_flat = 3
 
@@ -82,11 +83,11 @@ for b in buoys:
           suspect_span = [1.9, 25]
           
           #spike_test
-          tolerance = 7
           suspect_threshold_spike = 40
           fail_threshold_spike = 50
           
-          # flat_test (confirm values)
+          # flat_test (forced to pass, values have to be checked)
+          tolerance = 0
           suspect_threshold_flat = 2
           fail_threshold_flat = 3
 
@@ -96,9 +97,9 @@ for b in buoys:
               {
               "gross_range_test": {"fail_span": fail_span, "suspect_span": suspect_span},
 
-              "flat_line_test": {"tolerance": tolerance, "suspect_threshold": suspect_threshold_spike, "fail_threshold": fail_threshold_spike},
+              "flat_line_test": {"tolerance": tolerance, "suspect_threshold": suspect_threshold_flat , "fail_threshold": fail_threshold_flat},
 
-              "spike_test": {"suspect_threshold": suspect_threshold_flat, "fail_threshold": fail_threshold_flat},
+              "spike_test": {"suspect_threshold": suspect_threshold_spike, "fail_threshold": fail_threshold_spike},
 
              # "climatology_test": {},
 
@@ -127,11 +128,11 @@ for b in buoys:
           }
       
       
-      inp=ds[var]
-      tinp=ds['date_time']
-      zinp=ds[var]*0
+      inp_in=ds[var]
+      tinp_in=ds['date_time']
+      zinp_in=ds[var]*0
       
-      flags_dict[var] = apply_qc(inp,tinp,zinp, qc_config)
+      flags_dict[var] = apply_qc(inp_in, tinp_in, zinp_in, qc_config)
       
       ## Flag  grouping: if scores the same for all tests final flag is mantained, otherwise is labelled as bad data (e.g. 111 = 1, 999=9, 141 = 4)
       # 0 flag won't be applicable
