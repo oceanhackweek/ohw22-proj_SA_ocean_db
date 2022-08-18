@@ -15,11 +15,23 @@ CREATE TABLE pnboia_buoy (
     datetime DATE NOT NULL,
     wvht FLOAT,
     wvdir FLOAT,
+    tp FLOAT
+);
+
+-- new table to save the PNBOIA timeseries
+CREATE TABLE pnboia (
+    obsv_id INT,
+    pnboia_id INT,
+    datetime DATE NOT NULL,
+    wvht FLOAT,
+    wvht_flag_pnboia INT,
+    wvht_flag_qartod INT,
     tp FLOAT,
-    PRIMARY KEY(pnboia_id),
-    CONSTRAINT pnboia_id
-        FOREIGN KEY(pnboia_id)
-            REFERENCES pnboia_buoy_metadata(pnboia_id)
+    tp_flag_pnboia INT,
+    tp_flag_qartod INT,
+    wvdir FLOAT,
+    wvdir_flag_pnboia INT,
+    wvdir_flag_qartod INT
 );
 
 INSERT INTO pnboia_buoy_metadata VALUES (27, 'Alcatrazes', -24.129017, -45.676933, '2022-04-07', NULL, 1);
