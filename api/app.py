@@ -4,6 +4,8 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
+import pandas as pd
+
 #this is use to allow to access the api from a webapp
 app.add_middleware(
 	CORSMiddleware,
@@ -16,3 +18,10 @@ app.add_middleware(
 @app.get("/")
 def index():
 	return {"greeting": "Hello world"}
+
+@app.get("/test")
+def index():
+	df = pd.read_csv('/home/jovyan/OHW22_SA_ocean_db/api/abrolhos.csv')
+	df = df.to_json()
+	return df
+
