@@ -195,7 +195,7 @@ def pnboia_update_local_data():
     )
     datadir = os.path.join(
         scriptdir,
-        '../data'
+        f'{os.path.dirname(os.path.realpath(__file__))}/../data'
     )
     dateparser = lambda x: datetime.strptime(
         x, "%Y-%m-%d %H:%M:%S%z"
@@ -247,4 +247,4 @@ def pnboia_update_local_data():
             )))
             
 
-pnboia_update_local_data()
+# pnboia_update_local_data()
