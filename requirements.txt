@@ -1,4 +1,12 @@
 pip
+setuptools>=26
 numpy
 pandas
+
+fastapi
 python-dotenv
+sqlalchemy
+twine
+uvicorn
+psycopg2
+flask
