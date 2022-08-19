@@ -1,0 +1,27 @@
+name: Fetching data from PNBOIA
+
+
+on:
+  push:
+    branches:
+      - workflow
+  pull_request:
+    branches:
+      - workflow
+  # schedule:
+  #   - cron: "0 0 * * *"
+
+jobs:
+  build:
+    name: Gathering PNBOIA data
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9.13'
+    - run: |
+          python -m pip install --upgrade setuptools
+          pip install -e .
+          python ohw22sadb/pipeline.py

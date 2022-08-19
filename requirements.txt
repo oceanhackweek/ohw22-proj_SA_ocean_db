@@ -1,6 +1,6 @@
 pip
 setuptools>=26
-numpy
+numpy<1.23
 pandas
 
 fastapi
