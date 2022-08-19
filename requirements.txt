@@ -10,3 +10,5 @@ twine
 uvicorn
 psycopg2
 flask
+ioos_qc
+matplotlib
