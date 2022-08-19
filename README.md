@@ -64,4 +64,4 @@ Gather disperse oceaneanographic data for the South Atlantic and make it easily 
     - [Prediction and Research Moored Array in the Tropical Atlantic - PIRATA](https://www.pmel.noaa.gov/gtmba/pmel-theme/atlantic-ocean-pirata)
     - [Monitoring System of the Brazilian Coast - SiMCosta](https://simcosta.furg.br/home)
 
-### &#128218; References
+[comment]: <> (### &#128218; References)
