@@ -12,3 +12,4 @@ psycopg2
 flask
 ioos_qc
 matplotlib
+shapely<2
