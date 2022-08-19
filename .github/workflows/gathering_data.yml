@@ -23,5 +23,5 @@ jobs:
         python-version: '3.9.13'
     - run: |
           python -m pip install --upgrade setuptools
-          python setup.py install
+          pip install -e .
           python ohw22sadb/pipeline.py
