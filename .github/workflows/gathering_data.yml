@@ -4,10 +4,10 @@ name: Fetching data from PNBOIA
 on:
   push:
     branches:
-      - workflow
+      - api-client
   pull_request:
     branches:
-      - workflow
+      - api-client
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.9.13'
     - run: |
           python setup.py install
           python ohw22sadb/pipeline.py
