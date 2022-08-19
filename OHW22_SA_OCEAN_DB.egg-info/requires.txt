@@ -1,14 +1,10 @@
 pip
-setuptools>=26
 numpy
 pandas
-
-fastapi
 python-dotenv
+setuptools
+fastapi
 sqlalchemy
 twine
 uvicorn
 psycopg2
-flask
-ioos_qc
-matplotlib
