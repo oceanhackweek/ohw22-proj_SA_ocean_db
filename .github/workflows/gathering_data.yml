@@ -4,10 +4,10 @@ name: Fetching data from PNBOIA
 on:
   push:
     branches:
-      - api-client
+      - workflow
   pull_request:
     branches:
-      - api-client
+      - workflow
   # schedule:
   #   - cron: "0 0 * * *"
 
