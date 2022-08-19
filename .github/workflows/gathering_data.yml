@@ -1,10 +1,14 @@
 name: Fetching data from PNBOIA
 
+
 on:
+  push:
+    branches:
+      - api-client
   pull_request:
     branches:
-      - ['api-client']
-
+      - api-client
+      
 jobs:
   build:
     name: Gathering PNBOIA data
