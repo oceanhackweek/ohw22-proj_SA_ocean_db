@@ -19,8 +19,6 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.8'
-    
-    - name: Installing requirements and running app
     - run: |
           python setup.py install
           python ohw22sadb/pipeline.py
