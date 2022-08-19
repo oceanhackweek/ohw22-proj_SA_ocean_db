@@ -23,6 +23,8 @@ Paula Marangoni - [paulamarangoni](https://github.com/paulamarangoni)
 
 Tobias Ramalho dos Santos Ferreira - [soutobias](https://github.com/soutobias)
 
+Filipe Fernandes - [ocefpaf](https://github.com/ocefpaf)
+
 ---
 ### &#128129; Background
 The South Atlantic is one of the least observed oceans globally. It has several socio-economic impacts for bordering countries, from less accurate daily metocean weather forecasts to problems in seasonal forecasting of food crops, for example. The growth of worldwide ocean observing programs based on autonomus equipment such as [profilers](https://argo.ucsd.edu/) and [drifters](https://www.aoml.noaa.gov/global-drifter-program/) has greatly increased *in situ* observations in the role ocean basin. But for a comprehensive understanding of the South Atlantic other long-term and multi-parameter data from the entire water column are essential. For Brazilian waters, public data from weather buoys, CTDs, ADCPs and others  are still rare and those that exist are tightly dispersed across diferent institutions. This, in practice, means that these data do not exist for the community and do not bring any relevant gain to society.

@@ -1,1 +1,8 @@
 .env
+*/__pycache__/*
+
+# packaging folders and files
+build/
+dist/
+*.egg-info
+*.egg
