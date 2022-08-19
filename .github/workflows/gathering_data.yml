@@ -8,7 +8,7 @@ on:
   pull_request:
     branches:
       - api-client
-      
+
 jobs:
   build:
     name: Gathering PNBOIA data
@@ -21,4 +21,5 @@ jobs:
         python-version: '3.8'
     - run: |
           pip install -r requirements.txt
+          python setup.py install
           python ohw22sadb/pipeline.py
