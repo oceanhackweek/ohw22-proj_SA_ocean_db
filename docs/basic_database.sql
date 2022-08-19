@@ -1,4 +1,4 @@
-CREATE TABLE pnboia_buoy_metadata2 (
+CREATE TABLE pnboia_buoy_metadata (
     pnboia_id INT,
     location VARCHAR (255) UNIQUE NOT NULL,
     latitude float NOT NULL,
