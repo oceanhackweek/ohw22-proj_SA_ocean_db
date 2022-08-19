@@ -40,7 +40,25 @@ def index():
 	df = df.to_json()
 	return df
 
+@app.get("/metadata/pnboia/")
+def read_metadata_pnboia(buoy_id: Union[int, None] = None,):
 
+	engine = make_db_connection()
+
+	if buoy_id == None:
+		query = f''' SELECT * FROM ohw_satlantic.pnboia_buoy_metadata '''
+		df = pd.read_sql_query(query, con=engine)
+		result_md = df.to_dict(orient="records")
+
+	else: 
+		query = f''' SELECT * FROM ohw_satlantic.pnboia_buoy_metadata WHERE pnboia_id={buoy_id} '''
+		df = pd.read_sql_query(query, con=engine)
+		result_md = df.to_dict(orient="records")
+	return result_md
+
+
+# Endpoint to read each pnboia buoy available on the api by it ID
+# to get buoy ID go to read_metadata_pnboia
 @app.get("/buoy/{buoy_id}/")
 def read_buoy(buoy_id: int, 
 			  vars: Union[str, None] = None, 
