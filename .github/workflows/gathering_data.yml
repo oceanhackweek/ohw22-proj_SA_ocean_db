@@ -8,6 +8,8 @@ on:
   pull_request:
     branches:
       - api-client
+  # schedule:
+  #   - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -21,5 +23,5 @@ jobs:
         python-version: '3.9.13'
     - run: |
           python -m pip install --upgrade setuptools
-          pip install -e .
+          python setup.py install
           python ohw22sadb/pipeline.py
