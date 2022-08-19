@@ -1,40 +1,56 @@
+# &#127754; Ocean Database for South Atlantic
+
 # OHW22_SA_ocean_db
 ---
-## One line description
-This is a project developed by students to bridge information data gaps that are seen across the Brazilian coast. We have gathered data from various buoys to create one host where the information is available to the public.
+## &#128221; One line description
+Bridge ocean data gaps across the Brazilian coast and make it easily available to the public.
 
-### Collaborators
+### 👥 Collaborators
 
-Tobias Ramalho dos Santos Ferreira
+Danilo Augusto Silva - [nilodna](https://github.com/nilodna)
 
-Danilo Augusto Silva
+Denise Fukai - [denisefukai](https://github.com/denisefukai)
 
-Luiza Paschoal Stein
+Douglas M. Nehme - [douglasnehme](https://github.com/douglasnehme)
 
-Denise Fukai
+Filipe Fernandes - [ocefpaf](https://github.com/ocefpaf)
 
-Douglas Medeiros Nehme
+Luiza Paschoal Stein - [LuizaPS](https://github.com/LuizaPS)
 
-Paula Marangoni
+Marcela Strane - [marcela-strane](https://github.com/marcela-strane)
 
-Marcela Strane
+Paula Marangoni - [paulamarangoni](https://github.com/paulamarangoni)
 
-Michael Sun
-
-Filipe Fernandes
+Tobias Ramalho dos Santos Ferreira - [soutobias](https://github.com/soutobias)
 
 ---
-### Background
+### &#128129; Background
+The South Atlantic is one of the least observed oceans globally. It has several socio-economic impacts for bordering countries, from less accurate daily metocean weather forecasts to problems in seasonal forecasting of food crops, for example. The growth of worldwide ocean observing programs based on autonomus equipment such as [profilers](https://argo.ucsd.edu/) and [drifters](https://www.aoml.noaa.gov/global-drifter-program/) has greatly increased *in situ* observations in the role ocean basin. But for a comprehensive understanding of the South Atlantic other long-term and multi-parameter data from the entire water column are essential. For Brazilian waters, public data from weather buoys, CTDs, ADCPs and others  are still rare and those that exist are tightly dispersed across diferent institutions. This, in practice, means that these data do not exist for the community and do not bring any relevant gain to society.
 
-### Goals
-Our goals include gathering data from the buoys by interacting with their APIs to download real-time series data. Applying quality control measures to the data before hosting it on the database. Sending the data to the database so that users can look for specific data and interact with the API we are developing to obtain files.  
+### &#127919; Goals
+Gather disperse oceaneanographic data for the South Atlantic and make it easily available for the public.
 
-### Datasets
-SiMCOSTA: https://simcosta.furg.br/home
-This is a network of floating and fixed platforms in the south atlantic ocean that collect and display meteorological and oceanic data. 
-Pirata: http://www.goosbrasil.org/pirata/dados/
-This is a national buoy program that displays meteorological and oceanic data.  
+### &#128290; Datasets
+- [Brazilian National Buoy Program - PNBOIA](https://www.marinha.mil.br/chm/dados-do-goos-brasil/pnboia)
+  - The main Brazilian buoy program that is manage by the Brazilian Navy with suport of a multi-institutional national board. PNBOIA is one of the Brazilian efforts for [The Global Ocean Observing System - GOOS](https://www.goosocean.org/) and the [Regional Alliance in Oceanography for the Upper Southwest and Tropical Atlantic - OCEATLAN](http://www.oceatlan.org/).
 
-### Workflow
+### &#128256; Workflow
 
-### References
+- Gather weather buoy data;
+
+- Apply QC measures to the data;
+
+- Host the QC data into a SQL database;
+
+- Connect the SQL database to a API;
+
+- Make the API public.
+
+### &#128679; Future Developments
+
+- Map public ocean data for South Atlantic Ocean that is not delivered in a easy and/or programmatic way.
+  - Already planned datasets:
+    - [Prediction and Research Moored Array in the Tropical Atlantic - PIRATA](https://www.pmel.noaa.gov/gtmba/pmel-theme/atlantic-ocean-pirata)
+    - [Monitoring System of the Brazilian Coast - SiMCosta](https://simcosta.furg.br/home)
+
+### &#128218; References
