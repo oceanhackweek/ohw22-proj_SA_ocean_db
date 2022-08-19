@@ -79,7 +79,9 @@ def run_qc(buoy):
     TODO: put a description here
     """
     # Open buoy
-    fname = f'{os.path.dirname(os.path.realpath(__file__))}/../data/{buoy}.csv'
+    fname = f'/home/data/{buoy}.csv'
+
+    # fname = f'{os.path.dirname(os.path.realpath(__file__))}/../data/{buoy}.csv'
     ds = pd.read_csv(fname)
     #print(b)
 
