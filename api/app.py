@@ -36,7 +36,7 @@ def index():
 
 @app.get("/test")
 def index():
-	df = pd.read_csv('/home/jovyan/OHW22_SA_ocean_db/api/abrolhos.csv')
+	df = pd.read_csv('/abrolhos_qc.csv')
 	df = df.to_json()
 	return df
 
