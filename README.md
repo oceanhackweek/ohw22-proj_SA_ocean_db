@@ -1,4 +1,4 @@
-# &#127754; Ocean Database for South Atlantic
+# &#127754; Public Ocean Database for South Atlantic
 
 # OHW22_SA_ocean_db
 ---
@@ -29,6 +29,17 @@ The South Atlantic is one of the least observed oceans globally. It has several 
 
 ### &#127919; Goals
 Gather disperse oceaneanographic data for the South Atlantic and make it easily available for the public.
+
+### &#127942; Relevance
+- Fulfillment:
+  - #6 [United Nations Ocean Decade Goal](https://www.oceandecade.org/vision-mission/)
+    - An accessible ocean with open and equitable access to data, information and technology and innovation
+
+- Contribute to:
+  - #13, #14, and #15 [United Nations Sustainable Development Goals](https://sdgs.un.org/goals#goals)
+    - [#13](https://sdgs.un.org/goals/goal13): Take urgent action to combat climate change and its impacts
+    - [#14](https://sdgs.un.org/goals/goal14): Conserve and sustainably use the oceans, seas and marine resources for sustainable development
+    - [#15](https://sdgs.un.org/goals/goal15): Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss
 
 ### &#128290; Datasets
 - [Brazilian National Buoy Program - PNBOIA](https://www.marinha.mil.br/chm/dados-do-goos-brasil/pnboia)
