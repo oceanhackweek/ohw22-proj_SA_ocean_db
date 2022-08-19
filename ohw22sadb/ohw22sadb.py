@@ -51,7 +51,7 @@ def build_query(kwargs, API_URL='url'):
         raise ValueError("Please, provide a valid buoy_id.")
         
    # building the data query
-    query = f"{API_URL}/?"    
+    query = f"{API_URL}/buoy/?"   
     for key,value in kwargs.items():
         query += f"{key}={value}&"
     
