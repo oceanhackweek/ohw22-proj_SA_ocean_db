@@ -1,0 +1,10 @@
+pip
+numpy
+pandas
+python-dotenv
+setuptools
+fastapi
+sqlalchemy
+twine
+uvicorn
+psycopg2
