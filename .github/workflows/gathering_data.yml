@@ -20,6 +20,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup Environment File
       run: |
+        touch .env
         "echo HEROKU_TOKEN=${{ secrets.HEROKU_TOKEN }}" >> .env
         "echo PNBOIA_BUOYS_INFO=${{ secrets.PNBOIA_BUOYS_INFO }}" >> .env
         "echo PNBOIA_BUOYS_DATA=${{ secrets.PNBOIA_BUOYS_DATA }}" >> .env
