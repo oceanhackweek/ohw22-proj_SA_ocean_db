@@ -20,15 +20,13 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup Environment File
       run: |
-        touch .env
-        echo HEROKU_TOKEN=${{ secrets.HEROKU_TOKEN }} >> .env
-        echo PNBOIA_BUOYS_INFO=${{ secrets.PNBOIA_BUOYS_INFO }} >> .env
-        echo PNBOIA_BUOYS_DATA=${{ secrets.PNBOIA_BUOYS_DATA }} >> .env
-
-        echo POSTGRE_USER=${{ secrets.POSTGRE_USER }} >> .env
-        echo POSTGRE_LOCAL=${{ secrets.POSTGRE_LOCAL }} >> .env
-        echo POSTGRE_BD=${{ secrets.POSTGRE_BD }} >> .env
-        echo POSTGRE_PWD=${{ secrets.POSTGRE_PWD }} >> .env
+        echo "HEROKU_TOKEN=${{ secrets.HEROKU_TOKEN }}" >> .env
+        echo "PNBOIA_BUOYS_INFO=${{ secrets.PNBOIA_BUOYS_INFO }}" >> .env
+        echo "PNBOIA_BUOYS_DATA=${{ secrets.PNBOIA_BUOYS_DATA }}" >> .env
+        echo "POSTGRE_USER=${{ secrets.POSTGRE_USER }}" >> .env
+        echo "POSTGRE_LOCAL=${{ secrets.POSTGRE_LOCAL }}" >> .env
+        echo "POSTGRE_BD=${{ secrets.POSTGRE_BD }}" >> .env
+        echo "POSTGRE_PWD=${{ secrets.POSTGRE_PWD }}" >> .env
         
     - uses: actions/setup-python@v4
       with:
