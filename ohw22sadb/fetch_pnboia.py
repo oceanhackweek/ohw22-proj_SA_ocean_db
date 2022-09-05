@@ -143,7 +143,7 @@ def pnboia_seek_active_buoy():
     return active_buoys
 
 
-def pnboia_get_active_buoy_data():
+def pnboia_get_active_buoy_data(buoy_id):
     """
     Get all available data for each active buoy
 
@@ -154,99 +154,29 @@ def pnboia_get_active_buoy_data():
         is its data stored into a pandas.DataFrame
     """
     active_buoys = pnboia_seek_active_buoy()
-    data_dict = dict()
 
-    for _, buoy in active_buoys.iterrows():
-        buoy_name = buoy.name_buoy.strip()
-        buoy_name = buoy_name.replace(' ', '_')
-        buoy_name = buoy_name.casefold()
+    if any(active_buoys.id.isin([buoy_id])):
+
+        buoy_name = active_buoys.name_buoy[
+            active_buoys.id == buoy_id
+        ].values[0]
 
         buoy_datapath = pnboia_get_datapath(
-            buoy.id
+            buoy_id
         )
         buoy_data = pd.read_json(
             buoy_datapath
         )
         if buoy_data.empty:
-            continue
-            # print(
-            #     '..{0} is identified as active, but API returns no data'.format(
-            #         buoy_name.capitalize()
-            # ))
+            print(
+                '..{0} buoy is identified as active, but API returns an empty query'.format(
+                    buoy_name.capitalize()
+            ))
         else:
             buoy_data.set_index(
                 'date_time',
                 drop=True,
                 inplace=True
             )
-            data_dict[buoy_name] = buoy_data
     
-    return data_dict
-
-
-def pnboia_update_local_data():
-    """
-    Try to update local file with more recent buoy data and
-    if this do not exists yet save a new one. The data are saved into individual buoy .csv files on the data folder one level above current path. The drop of duplicated data
-    is the only treatment done here.
-    """
-    scriptdir = os.path.dirname(
-        sys.argv[0]
-    )
-    datadir = '/home/data'
-
-    # datadir = os.path.join(
-    #     scriptdir,
-    #     f'{os.path.dirname(os.path.realpath(__file__))}/../data'
-    # )
-    dateparser = lambda x: datetime.strptime(
-        x, "%Y-%m-%d %H:%M:%S%z"
-    )
-    active_data = pnboia_get_active_buoy_data()
-
-    for buoy_name, df_updates in active_data.items():
-        try:
-            df_old = pd.read_csv(
-                os.path.join(
-                    datadir,
-                    '{0}.csv'.format(
-                        buoy_name)),
-                sep=',',
-                header=0,
-                index_col='date_time',
-                parse_dates=True,
-                date_parser=dateparser
-            )
-            print(
-                'Updating {0} local data'.format(
-                    buoy_name.capitalize()
-            ))
-            df_new = pd.concat(
-                [df_old, df_updates],
-                axis='index'
-            )
-            df_new = df_new[
-                ~df_new.index.duplicated(
-                    keep='first'
-            )]
-            df_new.to_csv(
-                os.path.join(
-                    datadir,
-                    '{0}.csv'.format(
-                        buoy_name
-            )))
-        
-        except FileNotFoundError:
-            print(
-                'Creating {0} local data'.format(
-                    buoy_name.capitalize()
-            ))
-            df_updates.to_csv(
-                os.path.join(
-                    datadir,
-                    '{0}.csv'.format(
-                        buoy_name
-            )))
-            
-
-# pnboia_update_local_data()
+            return buoy_data
