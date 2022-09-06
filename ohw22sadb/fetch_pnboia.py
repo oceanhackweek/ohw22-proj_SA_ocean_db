@@ -145,13 +145,12 @@ def pnboia_seek_active_buoy():
 
 def pnboia_get_active_buoy_data(buoy_id):
     """
-    Get all available data for each active buoy
+    Get all available data for the buoy with buoy_id if it is active
 
     Returns
     -------
-    data_dict : dict
-        Dictionary where key is active buoy name and value
-        is its data stored into a pandas.DataFrame
+    buoy_data : pandas DataFrame
+        Buoy data stored into a pandas.DataFrame with datetime as index
     """
     active_buoys = pnboia_seek_active_buoy()
 
